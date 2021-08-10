@@ -2,11 +2,11 @@
   "name": "devcamper",
   "version": "1.0.0",
   "description": "* [Node](https://nodejs.org/en/) `^14.15.0` * [Yarn](https://yarnpkg.com/) `^1.22.4` or [NPM](https://www.npmjs.com/) `^6.14.5`",
-  "main": "index.js",
+  "main": "./src/server.js",
   "scripts": {
-    "run:dev ": "echo \"running app in dev mode\" && exit 1",
-    "run:prod ": "echo \"running app in prod mode\" && exit 1",
-    "run:destroy ": "echo \"detroy the data\" && exit 1",
+    "run:dev": "./node_modules/.bin/nodemon ./src/server.js",
+    "run:prod": "NODE_ENV=production node ./src/server.js",
+    "run:destroy": "echo \"detroy the data\" && exit 1",
     "install:mockData": "echo \"adding mock data\" && exit 1"
   },
   "repository": {
@@ -15,12 +15,37 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/DeanHristov/DevCamper/issues"
   },
   "homepage": "https://github.com/DeanHristov/DevCamper#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express-fileupload": "^1.2.1",
+    "express-mongo-sanitize": "^2.1.0",
+    "express-rate-limit": "^5.3.0",
+    "helmet": "^4.6.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.6",
+    "morgan": "^1.10.0",
+    "node-geocoder": "^3.27.0",
+    "nodemailer": "^6.6.3",
+    "randomatic": "^3.1.1",
+    "slugify": "^1.6.0",
+    "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  },
+  "nodemonConfig": {
+    "ignore": ["test/*", "docs/*"],
+    "delay": 2500
   }
 }
