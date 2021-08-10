@@ -1,0 +1,26 @@
+{
+  "name": "devcamper",
+  "version": "1.0.0",
+  "description": "* [Node](https://nodejs.org/en/) `^14.15.0` * [Yarn](https://yarnpkg.com/) `^1.22.4` or [NPM](https://www.npmjs.com/) `^6.14.5`",
+  "main": "index.js",
+  "scripts": {
+    "run:dev ": "echo \"running app in dev mode\" && exit 1",
+    "run:prod ": "echo \"running app in prod mode\" && exit 1",
+    "run:destroy ": "echo \"detroy the data\" && exit 1",
+    "install:mockData": "echo \"adding mock data\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeanHristov/DevCamper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DeanHristov/DevCamper/issues"
+  },
+  "homepage": "https://github.com/DeanHristov/DevCamper#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
