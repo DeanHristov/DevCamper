@@ -11,11 +11,3 @@ module.exports = async (MONGO_URI) => {
 
     console.log(colors.green(`MongoDB is connected to host: ${connectDB.connection.host.bold.underline}`))
 }
-
-
-
-
-
-
-
-
