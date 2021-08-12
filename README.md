@@ -1,10 +1,26 @@
 # DevCamper
+The main idea behind this repo is to show you my ability to work with this kind of technology and how I organize the project and code.
+
+DevCamper support basic functionality like GRUD operations, authentication (JWT/cookies),
+grouping users by rules, protecting the endpoints and others.
+
 ## Requirements
 * [Node](https://nodejs.org/en/) `^14.15.0`
 * [Yarn](https://yarnpkg.com/) `^1.22.4` or [NPM](https://www.npmjs.com/) `^6.14.5`
 
 ## Installation
-```$ npm install``` or ```$yarn install```
+After confirming that your environment meets the above [requirements](#requirements), it is time to clone the project locally by doing the following:
+
+```bash
+$ git clone https://github.com/DeanHristov/DevCamper.git <project-name>
+$ cd <project-name>
+```
+
+When you're done with the steps above, you need to install the project dependencies.
+
+```bash
+$ npm install #or using 'yarn install' 
+```
 
 ## Running the Project
 Running the app in **development** mode
@@ -169,6 +185,17 @@ npm run:destroy      | Destroy the all data
 - express-rate-limit - https://github.com/nfriedly/express-rate-limit
 - cors - https://github.com/expressjs/cors
 - pm2 - https://github.com/Unitech/pm2
+
+## Helpful resources
+
+- [ExpressJS](https://expressjs.com/)
+- [MongooseJS](https://mongoosejs.com/)
+- [HTTP Status Codes](https://httpstatuses.com/)
+- [HTTP methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
+- [Promises in JavaScript](https://zellwk.com/blog/js-promises/)
+- [JavaScript async and await](https://zellwk.com/blog/async-await/)
+- [Using Async/await in Express](https://zellwk.com/blog/async-await-express/)
+- [DRY in Express middlewares](https://www.acuriousanimal.com/blog/20180315/express-async-middleware)
 
 ## Made by 
 - Author: [D. Hristov](https://dhristov.eu/) | Version: [1.0.0]() | Documentation [here]() |  License: [MIT](https://opensource.org/licenses/MIT)

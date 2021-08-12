@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const colors = require('colors');
+
 module.exports = async (MONGO_URI) => {
     console.log(colors.yellow('Connecting to MongoDB....'))
     const connectDB = await mongoose.connect(MONGO_URI, {
