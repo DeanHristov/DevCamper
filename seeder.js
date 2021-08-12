@@ -1,7 +1,8 @@
 const fs = require('fs');
-const mongoose = require('mongoose');
 const colors = require('colors');
 const dotenv = require('dotenv');
+
+const connectDB = require('./src/core/connectDB');
 
 // Load config vars
 dotenv.config();
@@ -11,12 +12,7 @@ const { MONGO_URI } = process.env;
 const BootcampSchema = require('./src/models/Bootcamps');
 
 // Connect to db
-mongoose.connect(MONGO_URI, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-});
+connectDB(MONGO_URI);
 
 const mockBootcamps = fs.readFileSync(`${__dirname}/src/mockData/bootcamps.json`, 'utf8')
 
