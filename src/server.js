@@ -1,14 +1,47 @@
-const http = require('http');
-const PORT = 5000;
-const server = http.createServer((req, res) => {
-    res.writeHead(200, {
-        'Content-Type': 'application/json'
-    })
-    res.end(JSON.stringify({
-        status: 'success',
-        message: 'It is working'
-    }));
-    console.log(req);
-});
+const express = require('express');
+const dotenv = require('dotenv');
+const morgan = require('morgan');
+const colors = require('colors');
 
-server.listen(PORT, () => console.log(`The app is running on port: ${PORT}`))
+
+const connectDB = require('./core/connectDB');
+const errorHandler = require('./middlewares/errorHandler');
+
+// Load config vars
+dotenv.config();
+const {
+    API_VERSION, NODE_ENV, NODE_PORT,
+    MONGO_URI
+} = process.env;
+
+// Connected to DB:
+connectDB(MONGO_URI)
+
+// Creates an Express application
+const app = express();
+const PORT = NODE_PORT || 3000
+
+app.use(express.json())
+// Including middlewares in DEV mode
+if (NODE_ENV === 'dev elopment') {
+    app.use(morgan('dev'))
+}
+// Connect to the db
+
+// Load the routes
+const bootcamps = require('./routes/bootcamps');
+
+// Mount the routes
+app.use(`${API_VERSION}/bootcamps`, bootcamps);
+
+app.use(errorHandler);
+
+// Running the server
+const server = app.listen(PORT, () => console.log(
+    colors.green(`The server is running in "${NODE_ENV.underline}" mode on port ${PORT.underline}`)
+))
+
+process.on('unhandledRejection', async (reason, promise) => {
+    console.log(colors.bgRed(`Error! ${reason.message}`));
+    server.close(() => process.exit(1))
+})
