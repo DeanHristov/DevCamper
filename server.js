@@ -4,8 +4,8 @@ const morgan = require('morgan');
 const colors = require('colors');
 
 
-const connectDB = require('./core/connectDB');
-const errorHandler = require('./middlewares/errorHandler');
+const connectDB = require('./src/core/connectDB');
+const errorHandler = require('./src/middlewares/errorHandler');
 
 // Load config vars
 dotenv.config();
@@ -29,7 +29,7 @@ if (NODE_ENV === 'dev elopment') {
 // Connect to the db
 
 // Load the routes
-const bootcamps = require('./routes/bootcamps');
+const bootcamps = require('./src/routes/bootcamps');
 
 // Mount the routes
 app.use(`${API_VERSION}/bootcamps`, bootcamps);
@@ -45,3 +45,4 @@ process.on('unhandledRejection', async (reason, promise) => {
     console.log(colors.bgRed(`Error! ${reason.message}`));
     server.close(() => process.exit(1))
 })
+

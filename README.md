@@ -23,6 +23,15 @@ $ npm install #or using 'yarn install'
 ```
 
 ## Running the Project
+Importing **mock** data into DB
+```bash
+$ npm run importData
+```
+Removing the data from DB
+```bash
+$ npm run destroyData
+```
+
 Running the app in **development** mode
 ```bash
 $ npm run:dev  # Start the development server or `yarn run:dev`
@@ -153,10 +162,10 @@ All tasks automation are based on [NPM scripts](https://docs.npmjs.com/misc/scri
 
 Tasks              | Description
 ------------------ |---------------------------------------------------------------------------------------
-npm run:dev          | Run in **dev** mode
-npm run:prod         | Run in **prod** mode
-npm install:mockData | Import mock data
-npm run:destroy      | Destroy the all data
+npm run dev          | Run in **dev** mode
+npm run prod         | Run in **prod** mode
+npm run importData   | Import mock data
+npm run destroyData  | Destroy the all data
 
 ## Tools
 
