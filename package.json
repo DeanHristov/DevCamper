@@ -4,10 +4,10 @@
   "description": "* [Node](https://nodejs.org/en/) `^14.15.0` * [Yarn](https://yarnpkg.com/) `^1.22.4` or [NPM](https://www.npmjs.com/) `^6.14.5`",
   "main": "./src/server.js",
   "scripts": {
-    "run:dev": "./node_modules/.bin/nodemon ./src/server.js",
-    "run:prod": "NODE_ENV=production node ./src/server.js",
-    "run:destroy": "echo \"detroy the data\" && exit 1",
-    "install:mockData": "echo \"adding mock data\" && exit 1"
+    "run:dev": "./node_modules/.bin/nodemon ./server.js",
+    "run:prod": "NODE_ENV=production node ./server.js",
+    "importData": "node ./seeder.js -i",
+    "destroyData": "node ./seeder.js -d"
   },
   "repository": {
     "type": "git",
