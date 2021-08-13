@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const slugify = require('slugify');
 
 const { Schema, model } = mongoose;
-const { String, Boolean } = mongoose.Schema.Types;
+const { String, Boolean, Date } = mongoose.Schema.Types;
 const BootcampSchema = new Schema({
    name: {
        type: String,

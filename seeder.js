@@ -10,15 +10,18 @@ const { MONGO_URI } = process.env;
 
 // Load modules
 const BootcampSchema = require('./src/models/Bootcamps');
+const CoursesSchema = require('./src/models/Courses');
 
 // Connect to db
 connectDB(MONGO_URI);
 
 const mockBootcamps = fs.readFileSync(`${__dirname}/src/mockData/bootcamps.json`, 'utf8')
+const mockCourses = fs.readFileSync(`${__dirname}/src/mockData/courses.json`, 'utf8')
 
 const importIntoDB = async () => {
     try {
         await BootcampSchema.create(JSON.parse(mockBootcamps));
+        await CoursesSchema.create(JSON.parse(mockCourses));
         console.log(colors.green('Great! Data ware imported!'));
         process.exit(0);
     } catch (reason) {
@@ -30,6 +33,7 @@ const importIntoDB = async () => {
 const removeDataFromDB = async () => {
     try {
         await BootcampSchema.deleteMany();
+        await CoursesSchema.deleteMany();
         console.log(colors.green('The data have been removed successfully'));
         process.exit(0);
     } catch (reason) {
