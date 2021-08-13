@@ -5,6 +5,10 @@ const {
     deleteBootCamp, updateBootCamp, modifyBootCamp
 } = require('../controllers/bootcamps');
 
+const courseRouter = require('./courses');
+
+router.use('/:bootcampId/courses', courseRouter)
+
 router.route('/')
     .get(getAllBootCamps)
     .post(creatBootCamp)
