@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const { Schema, model } = mongoose;
-const { String, Boolean, Date } = mongoose.Schema.Types;
+const { String, Boolean, Date, ObjectId } = mongoose.Schema.Types;
 const CoursesSchema = new Schema({
     title: {
         type: String,
@@ -34,13 +34,13 @@ const CoursesSchema = new Schema({
         default: Date.now
     },
     bootcamp: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Bootcamp',
+        type: ObjectId,
+        ref: 'bootcamps',
         required: true
     },
     user: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'User',
+        type: ObjectId,
+        ref: 'users',
         required: true
     }
 });

@@ -6,7 +6,7 @@ module.exports = (err, req, res, next) => {
 
     switch (err.name) {
         case 'CastError':
-            message = `Error! Bootcamp with id ${error.value} doesn't exists!`;
+            message = `Error! The record with id ${error.value} doesn't exists!`;
 
             error = new ErrorResponse(message, 404)
             break;

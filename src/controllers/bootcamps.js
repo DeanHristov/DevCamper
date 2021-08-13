@@ -94,7 +94,6 @@ exports.getBootcampById = asyncHandler(async (req, res, next) => {
 exports.creatBootCamp = asyncHandler(async (req, res, next) => {
     const newBootcamp = await BootcampModule.create(req.body);
 
-    console.log(req.body);
     res.status(201);
     res.json({
         success: true,
