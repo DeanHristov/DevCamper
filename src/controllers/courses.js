@@ -10,25 +10,18 @@ const BootcampModule = require("../models/Bootcamps");
 // @access: Public
 exports.getCourses = asyncHandler(async (req, res, next) => {
     const { bootcampId } = req.params;
-    let querySelector = null;
 
     if (isNotNull(bootcampId)) {
-        querySelector = CourseModule.find({ bootcamp: bootcampId })
-    } else {
-        querySelector = CourseModule.find().populate({
-            path: 'bootcamp',
-            select: 'name description'
-        });
+        const coursesArray = await CourseModule.find({ bootcamp: bootcampId })
+        return res.status(200)
+            .json({
+                success: true,
+                size: coursesArray.length,
+                data: coursesArray,
+            });
     }
 
-    const coursesArray = await querySelector;
-
-    res.status(200)
-        .json({
-            success: true,
-            size: coursesArray.length,
-            data: coursesArray,
-        });
+    res.status(200).json(res.advanceFiltering)
 });
 
 
