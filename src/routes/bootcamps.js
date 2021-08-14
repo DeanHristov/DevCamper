@@ -5,8 +5,18 @@ const {
     deleteBootCamp, updateBootCamp, modifyBootCamp
 } = require('../controllers/bootcamps');
 
+const BootcampModel = require('../models/Bootcamps');
+const advanceFiltering = require('../middlewares/advanceFiltering');
+const courseRouter = require('./courses');
+const populateParams = {
+    path: 'courses',
+    select: 'title -bootcamp'
+};
+
+router.use('/:bootcampId/courses', courseRouter)
+
 router.route('/')
-    .get(getAllBootCamps)
+    .get(advanceFiltering(BootcampModel, populateParams), getAllBootCamps)
     .post(creatBootCamp)
 
 router.route('/:id')

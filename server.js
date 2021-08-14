@@ -29,10 +29,12 @@ if (NODE_ENV === 'dev elopment') {
 // Connect to the db
 
 // Load the routes
-const bootcamps = require('./src/routes/bootcamps');
+const bootcampsRouter = require('./src/routes/bootcamps');
+const coursesRouter = require('./src/routes/courses');
 
 // Mount the routes
-app.use(`${API_VERSION}/bootcamps`, bootcamps);
+app.use(`${API_VERSION}/bootcamps`, bootcampsRouter);
+app.use(`${API_VERSION}/courses`, coursesRouter);
 
 app.use(errorHandler);
 
