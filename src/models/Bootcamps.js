@@ -100,13 +100,32 @@ const BootcampSchema = new Schema({
     //     ref: 'User',
     //     required: true
     // }
+}, {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true}
 });
+
+// Creating reverse populate field (virtual field)
+BootcampSchema.virtual('courses', {
+    ref: 'courses',
+    localField: '_id',
+    foreignField: 'bootcamp',
+    justOne: false,
+})
 
 // Creating slug from the name
 BootcampSchema.pre('save', function (next) {
     this.slug = slugify(this.name, {
         lower: true,
         replacement: '-'
+    })
+    next();
+});
+
+// Cascade delete the all courses when we remove bootcamp
+BootcampSchema.pre('remove', async function (next) {
+    await this.model('courses').deleteMany({
+        bootcamp: this._id
     })
     next();
 })

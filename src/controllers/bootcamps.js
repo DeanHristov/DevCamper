@@ -29,7 +29,10 @@ exports.getAllBootCamps = asyncHandler(async (req, res, next) => {
         queryString.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`)
     )
 
-    let querySelect = BootcampModule.find(queryParams)
+    let querySelect = BootcampModule.find(queryParams).populate({
+        path: 'courses',
+        select: 'title -bootcamp'
+    })
 
     // Selecting data by particular fields
     if (query.hasOwnProperty('selectBy')) {
@@ -79,7 +82,10 @@ exports.getAllBootCamps = asyncHandler(async (req, res, next) => {
 // @route:  {GET} /api/v1/bootcamps/:id
 // @access: Public
 exports.getBootcampById = asyncHandler(async (req, res, next) => {
-    const bootcamp = await BootcampModule.findById(req.params.id)
+    const bootcamp = await BootcampModule.findById(req.params.id).populate({
+        path: 'courses',
+        select: 'title -bootcamp'
+    })
 
     res.status(200)
     res.json({
@@ -105,12 +111,12 @@ exports.creatBootCamp = asyncHandler(async (req, res, next) => {
 // @route:  {DELETE} /api/v1/bootcamps/:id
 // @access: Private
 exports.deleteBootCamp = asyncHandler(async (req, res, next) => {
-    const bootcamp = await BootcampModule.findByIdAndDelete(req.params.id)
+    const bootcamp = await BootcampModule.findById(req.params.id)
 
     if (!bootcamp) {
         return next(new ErrorResponse(`Error! Bootcamp with id ${req.params.id} doesn't exists!`, 400));
     }
-
+    bootcamp.remove();
     res.status(200);
     return res.json({
         success: true,

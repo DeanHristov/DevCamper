@@ -25,6 +25,6 @@ module.exports = (err, req, res, next) => {
     res.status(error.statusCode || 500)
     res.json({
         success: false,
-        error: [{ msg: error.message || 'Server error!' }]
+        error: [{ msg: error.message || err.message || 'Server error!' }]
     })
 }

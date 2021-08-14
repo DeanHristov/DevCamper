@@ -16,7 +16,7 @@ exports.getCourses = asyncHandler(async (req, res, next) => {
         querySelector = CourseModule.find({ bootcamp: bootcampId })
     } else {
         querySelector = CourseModule.find().populate({
-            path: 'bootcamps',
+            path: 'bootcamp',
             select: 'name description'
         });
     }
