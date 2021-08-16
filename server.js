@@ -1,8 +1,10 @@
+const path = require('path');
+
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
-
+const fileUpload = require('express-fileupload');
 
 const connectDB = require('./src/core/connectDB');
 const errorHandler = require('./src/middlewares/errorHandler');
@@ -21,7 +23,16 @@ connectDB(MONGO_URI)
 const app = express();
 const PORT = NODE_PORT || 3000
 
-app.use(express.json())
+app.use(express.json());
+
+// Uploading file
+app.use(fileUpload({
+    limits: { fileSize: 50 * 1024 * 1024 },
+}));
+
+// Adding static folder
+app.use(express.static(path.join(`${__dirname}/src`, 'public')))
+
 // Including middlewares in DEV mode
 if (NODE_ENV === 'dev elopment') {
     app.use(morgan('dev'))
@@ -40,11 +51,11 @@ app.use(errorHandler);
 
 // Running the server
 const server = app.listen(PORT, () => console.log(
-    colors.green(`The server is running in "${NODE_ENV.underline}" mode on port ${PORT.underline}`)
+    colors.green(`[SERVER] The server is running in "${NODE_ENV.underline}" mode on port ${PORT.underline}`)
 ))
 
 process.on('unhandledRejection', async (reason, promise) => {
-    console.log(colors.bgRed(`Error! ${reason.message}`));
+    console.log(colors.bgRed(`[SERVER] Error! ${reason.message}`));
     server.close(() => process.exit(1))
 })
 

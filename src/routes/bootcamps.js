@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {
     getAllBootCamps, getBootcampById, creatBootCamp,
-    deleteBootCamp, updateBootCamp, modifyBootCamp
+    deleteBootCamp, updateBootCamp, modifyBootCamp, uploadBootcampPhoto
 } = require('../controllers/bootcamps');
 
 const BootcampModel = require('../models/Bootcamps');
@@ -24,5 +24,8 @@ router.route('/:id')
     .delete(deleteBootCamp)
     .put(updateBootCamp)
     .patch(modifyBootCamp)
+
+router.route('/:id/photo')
+    .put(uploadBootcampPhoto);
 
 module.exports = router;

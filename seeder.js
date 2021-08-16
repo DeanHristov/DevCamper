@@ -22,7 +22,7 @@ const importIntoDB = async () => {
     try {
         await BootcampSchema.create(JSON.parse(mockBootcamps));
         await CoursesSchema.create(JSON.parse(mockCourses));
-        console.log(colors.green('Great! Data ware imported!'));
+        console.log(colors.green('[DB] Great! Data ware imported!'));
         process.exit(0);
     } catch (reason) {
         console.log(colors.bgRed(reason));
@@ -34,7 +34,7 @@ const removeDataFromDB = async () => {
     try {
         await BootcampSchema.deleteMany();
         await CoursesSchema.deleteMany();
-        console.log(colors.green('The data have been removed successfully'));
+        console.log(colors.green('[DB] The data have been removed successfully'));
         process.exit(0);
     } catch (reason) {
         console.log(colors.bgRed(reason));
