@@ -17,7 +17,10 @@ const advanceFiltering = ($model, populate) => async (req, res, next) => {
     queryString = JSON.stringify(requestQuery);
 
     // Parsing query params as a query language in MongoDB
-    // Example params:  { "query": { "averageCost": { "$gte": "1000" } } }
+    // Example: averageCost[gte]=1000 =>  { "query": { "averageCost": { "$gte": "1000" } } }
+
+    // @see: https://docs.mongodb.com/manual/reference/operator/query/
+    // @see: https://mongoosejs.com/docs/tutorials/query_casting.html
     const queryParams = JSON.parse(
         queryString.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`)
     )
