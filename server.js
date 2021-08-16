@@ -13,7 +13,7 @@ const errorHandler = require('./src/middlewares/errorHandler');
 dotenv.config();
 const {
     API_VERSION, NODE_ENV, NODE_PORT,
-    MONGO_URI
+    MONGO_URI, FILE_UPLOAD_MAX_LIMIT_SIZE
 } = process.env;
 
 // Connected to DB:
@@ -27,11 +27,11 @@ app.use(express.json());
 
 // Uploading file
 app.use(fileUpload({
-    limits: { fileSize: 50 * 1024 * 1024 },
+    limits: { fileSize: FILE_UPLOAD_MAX_LIMIT_SIZE },
 }));
 
 // Adding static folder
-app.use(express.static(path.join(`${__dirname}/src`, 'public')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Including middlewares in DEV mode
 if (NODE_ENV === 'dev elopment') {
