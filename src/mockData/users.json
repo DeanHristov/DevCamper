@@ -1,0 +1,23 @@
+[
+  {
+    "_id": "5d7a514b5d2c12c7449be001",
+    "name": "Admin Account",
+    "email": "admin@my-site.com",
+    "role": "admin",
+    "password": "123456"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be002",
+    "name": "Publisher Account",
+    "email": "publisher@my-site.com",
+    "role": "publisher",
+    "password": "123456"
+  },
+  {
+    "_id": "5d7a514b5d2c12c7449be003",
+    "name": "User Account",
+    "email": "user@my-site.com",
+    "role": "user",
+    "password": "123456"
+  }
+]

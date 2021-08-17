@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const colors = require('colors')
 
 const asyncHandler = require('../utils/asyncHandler');
 const ErrorResponse = require('../utils/ErrorResponse');
@@ -22,6 +23,15 @@ exports.protectRoute = asyncHandler(async (req, res, next) => {
 
         next( )
     } catch (reason) {
-
+        console.log(colors.bgRed(reason))
     }
 })
+
+exports.grantAccessToRoles = (...roles) => (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+        return next(new ErrorResponse(
+            `Error! The user's role (${req.user.role}) is not authorize to perform this action!`, 403)
+        );
+    }
+    next();
+}
