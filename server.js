@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
 const fileUpload = require('express-fileupload');
+const cookieParser = require('cookie-parser')
 
 const connectDB = require('./src/core/connectDB');
 const errorHandler = require('./src/middlewares/errorHandler');
@@ -23,7 +24,9 @@ connectDB(MONGO_URI)
 const app = express();
 const PORT = NODE_PORT || 3000
 
+// Added third-party middlewares
 app.use(express.json());
+app.use(cookieParser());
 
 // Uploading file
 app.use(fileUpload({
@@ -42,10 +45,12 @@ if (NODE_ENV === 'dev elopment') {
 // Load the routes
 const bootcampsRouter = require('./src/routes/bootcamps');
 const coursesRouter = require('./src/routes/courses');
+const authRouter = require('./src/routes/auth');
 
 // Mount the routes
 app.use(`${API_VERSION}/bootcamps`, bootcampsRouter);
 app.use(`${API_VERSION}/courses`, coursesRouter);
+app.use(`${API_VERSION}/auth`, authRouter);
 
 app.use(errorHandler);
 

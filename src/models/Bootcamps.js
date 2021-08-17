@@ -106,6 +106,7 @@ const BootcampSchema = new Schema({
 });
 
 // Creating reverse populate field (virtual field)
+// @see: https://mongoosejs.com/docs/populate.html#populate-virtuals
 BootcampSchema.virtual('courses', {
     ref: 'courses',
     localField: '_id',

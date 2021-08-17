@@ -27,6 +27,7 @@ const advanceFiltering = ($model, populate) => async (req, res, next) => {
     let querySelect = $model.find(queryParams);
 
     // Including populate
+    // @see: https://mongoosejs.com/docs/populate.html#populate-virtuals
     if (isNotNull(populate)) querySelect.populate(populate)
 
     // Selecting data by particular fields

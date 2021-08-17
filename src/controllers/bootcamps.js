@@ -7,7 +7,6 @@ const asyncHandler = require('../utils/asyncHandler');
 // @desc:   Get all bootcamps
 // @route:  {GET} /api/v1/bootcamps
 // @access: Public
-
 exports.getAllBootCamps = asyncHandler(async (req, res, next) => {
     res.status(200);
     res.json(res.advanceFiltering)
@@ -111,7 +110,7 @@ exports.uploadBootcampPhoto = asyncHandler(async (req, res, next) => {
 
     //Validate the input file
     if (!file.mimetype.startsWith('image/jpeg') || file.size > FILE_UPLOAD_MAX_LIMIT_SIZE) {
-        // @see: https://stackoverflow.com/questions/30114881/how-does-this-equal-10mb
+        // @see: https://stackoverflow.com/questions /30114881/how-does-this-equal-10mb
         const maxSize = FILE_UPLOAD_MAX_LIMIT_SIZE / 1024 / 1024;
         return next(new ErrorResponse(
             `Error! Please, File type or size is incorrect! API support types: 'image/jpeg', max size: ${maxSize}MB`, 400
