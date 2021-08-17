@@ -2,6 +2,7 @@ const UserModule = require('../models/Users');
 const ErrorResponse = require('../utils/ErrorResponse');
 const asyncHandler = require('../utils/asyncHandler');
 const {isNull} = require("../utils/Utils");
+const sendTokenToResponse  = require('../utils/sendTokenToResponse');
 
 // @desc:   Creating a new user
 // @route:  {POST} /api/v1/auth/register
@@ -12,13 +13,7 @@ exports.registerNewUser = asyncHandler(async (req, res, next) => {
         name, email, password, role
     });
 
-    // Create new token:
-    const token = newUser.getJWTToken();
-    res.status(200)
-        .json({
-            success: true,
-            data: [{ token }]
-        })
+    sendTokenToResponse(newUser, 200, res);
 });
 
 // @desc:   Login with existing user
@@ -43,11 +38,5 @@ exports.signIn = asyncHandler(async (req, res, next) => {
 
     if (!isPassMatched)  return next(invalidCredesMsg)
 
-    res.status(200)
-        .json({
-            success: true,
-            data: [{
-                token: user.getJWTToken()
-            }]
-        })
+    sendTokenToResponse(user, 200, res);
 });
