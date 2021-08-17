@@ -42,10 +42,12 @@ if (NODE_ENV === 'dev elopment') {
 // Load the routes
 const bootcampsRouter = require('./src/routes/bootcamps');
 const coursesRouter = require('./src/routes/courses');
+const authRouter = require('./src/routes/auth');
 
 // Mount the routes
 app.use(`${API_VERSION}/bootcamps`, bootcampsRouter);
 app.use(`${API_VERSION}/courses`, coursesRouter);
+app.use(`${API_VERSION}/auth`, authRouter);
 
 app.use(errorHandler);
 
