@@ -11,10 +11,7 @@ function sendTokenToResponse(model, statusCode, res) {
 
     res.status(statusCode)
         .cookie('token', token, cookieOptions)
-        .json({
-            success: true,
-            data: [{ token }]
-        })
+        .json({ success: true, token })
 }
 
 module.exports = sendTokenToResponse;

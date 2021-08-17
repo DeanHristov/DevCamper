@@ -40,3 +40,16 @@ exports.signIn = asyncHandler(async (req, res, next) => {
 
     sendTokenToResponse(user, 200, res);
 });
+
+// @desc:   Get current logged user
+// @route:  {GET} /api/v1/auth/me
+// @access: Private
+exports.getMyself = asyncHandler(async (req, res, next) => {
+    const currUser = await UserModule.findById(req.user.id)
+
+    res.status(200)
+        .json({
+            success: true,
+            data: [currUser]
+        })
+});
