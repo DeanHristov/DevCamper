@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 
 const { isNull } = require('../utils/Utils')
 const { JWT_SECRET, JWT_EXPIRE } = process.env;
 const { Schema, model } = mongoose;
-const { String, Date } = mongoose.Schema.Types;
+const { String } = mongoose.Schema.Types;
 const UserSchema = new Schema({
     name: {
         type: String,
@@ -35,23 +36,25 @@ const UserSchema = new Schema({
         select: false,
     },
     resetPasswordToken: String,
-    resetPasswordExpire: Date,
+    resetPasswordExpire: mongoose.Schema.Types.Date,
     createdAt: {
-        type: Date,
-        default: Date.now
+        type: mongoose.Schema.Types.Date,
+        default: mongoose.Schema.Types.Date.now
     }
 });
 
 // Encrypt the password with bcrypt-js
-UserSchema.pre('save', function (next) {
-    const salt = bcrypt.genSaltSync(10);
-    this.password = bcrypt.hashSync(this.password, salt);
+UserSchema.pre('save', async function (next) {
+    if (!this.isModified('password')) {
+        next();
+    }
 
-    next()
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
 });
 
 // Sign JWT and return it.
-UserSchema.methods.getJWTToken = function () {
+UserSchema.methods.getJWToken = function () {
     const token = jwt.sign({ id: this._id }, JWT_SECRET, { expiresIn: JWT_EXPIRE });
 
     return token;
@@ -62,6 +65,18 @@ UserSchema.methods.isMatchedPasswords = async function (enteredPassword = null )
     if (isNull(enteredPassword)) return false;
 
     return await bcrypt.compare(enteredPassword, this.password)
+}
+
+UserSchema.methods.getResetToken = function () {
+    const resetToken = crypto.randomBytes(20).toString('hex')
+    this.resetPasswordToken = crypto
+        .createHash('sha256')
+        .update(resetToken)
+        .digest('hex');
+
+    this.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
+
+    return resetToken;
 }
 
 module.exports = model('users', UserSchema);
