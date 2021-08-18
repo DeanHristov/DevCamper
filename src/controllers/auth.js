@@ -47,9 +47,5 @@ exports.signIn = asyncHandler(async (req, res, next) => {
 exports.getMyself = asyncHandler(async (req, res, next) => {
     const currUser = await UserModule.findById(req.user.id)
 
-    res.status(200)
-        .json({
-            success: true,
-            data: [currUser]
-        })
+    res.status(200).json({ success: true, data: [currUser] })
 });

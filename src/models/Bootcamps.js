@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const slugify = require('slugify');
 
 const { Schema, model } = mongoose;
-const { String, Boolean, Date } = mongoose.Schema.Types;
+const { String, Boolean, Date, ObjectId } = mongoose.Schema.Types;
 const BootcampSchema = new Schema({
    name: {
        type: String,
@@ -95,11 +95,11 @@ const BootcampSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    // user: {
-    //     type: mongoose.Schema.ObjectId,
-    //     ref: 'User',
-    //     required: true
-    // }
+    user: {
+        type: ObjectId,
+        ref: 'users',
+        required: true
+    }
 }, {
     toJSON: { virtuals: true },
     toObject: { virtuals: true}
