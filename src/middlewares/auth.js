@@ -24,6 +24,7 @@ exports.protectRoute = asyncHandler(async (req, res, next) => {
         next( )
     } catch (reason) {
         console.log(colors.bgRed(reason))
+        return next(new ErrorResponse("Error! Your token is expired!", 401));
     }
 })
 

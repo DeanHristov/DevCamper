@@ -3,6 +3,7 @@ const ErrorResponse = require('../utils/ErrorResponse');
 const asyncHandler = require('../utils/asyncHandler');
 const { isNotNull, isNull} = require('../utils/Utils')
 const BootcampModule = require("../models/Bootcamps");
+const {USER_ROLES} = require("../commons/constants");
 
 // @desc:   Get all courses
 // @route:  {GET} /api/v1/courses
@@ -54,18 +55,25 @@ exports.getCourseById = asyncHandler(async (req, res, next) => {
 exports.createCourse = asyncHandler(async (req, res, next) => {
     const { bootcampId } = req.params;
     const bootcamp = await BootcampModule.findById(bootcampId)
+    const { user } = req;
 
+    req.body.user = user.id;
 
     if (isNull(bootcamp)) {
         return next(new ErrorResponse(`Error! The bootcamp with id: ${bootcampId} doesn't exists!`))
     }
 
-    const newCourse = CourseModule.create(req.body);
+    // Check if the user is owner of the bootcamp
+    if (bootcamp.user.toString() !== user.id && user.role !== USER_ROLES.ADMIN) {
+        return next(new ErrorResponse(`Error! This user is not authorize to add this course`, 401));
+    }
+
+    const newCourse = await CourseModule.create(req.body);
 
     res.status(200)
         .json({
             success: true,
-            data: newCourse,
+            data: [newCourse],
         });
 });
 
@@ -74,16 +82,24 @@ exports.createCourse = asyncHandler(async (req, res, next) => {
 // @access: Private
 exports.deleteCourse = asyncHandler(async (req, res, next) => {
     const { courseId } = req.params;
-    const course = await CourseModule.findByIdAndDelete(courseId)
+    const course = await CourseModule.findById(courseId)
+    const { user } = req;
 
     if (isNull(course)) {
         return next(new ErrorResponse(`Error! Course with id ${req.params.id} doesn't exists!`, 400));
     }
 
+    // Check if the user is owner of the course
+    if (course.user.toString() !== user.id && user.role !== USER_ROLES.ADMIN) {
+        return next(new ErrorResponse(`Error! This user is not authorize to modify this course`, 401));
+    }
+
+    await CourseModule.findOneAndDelete({ _id: course._id });
+
     res.status(200);
     return res.json({
         success: true,
-        data: [course]
+        data: []
     });
 });
 
@@ -92,14 +108,22 @@ exports.deleteCourse = asyncHandler(async (req, res, next) => {
 // @access: Private
 exports.updateCourse = asyncHandler(async (req, res, next) => {
     const { courseId } = req.params;
-    const course = await CourseModule.findByIdAndUpdate(courseId, req.body, {
-        new: true,
-        runValidators: true,
-    });
+    const course = await CourseModule.findById(courseId);
+    const { user } = req;
 
     if (isNull(course)) {
         return next(new ErrorResponse(`Error! Course with id ${req.params.id} doesn't exists!`, 400));
     }
+
+    // Check if the user is owner of the course
+    if (course.user.toString() !== user.id && user.role !== USER_ROLES.ADMIN) {
+        return next(new ErrorResponse(`Error! This user is not authorize to modify this course`, 401));
+    }
+
+    await CourseModule.findByIdAndUpdate(courseId, req.body, {
+        new: true,
+        runValidators: true,
+    });
 
     res.status(200);
     return res.json({
