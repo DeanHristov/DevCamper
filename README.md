@@ -98,7 +98,7 @@ $ npm run:prod  # Start the development server or `yarn run:prod`
 
 ### Users & Authentication
 - Authentication will be ton using JWT/cookies
-    * JWT and cookie should expire in 30 days
+    * JWT and cookie should expire in 1 hour
 - User registration
     * Register as a "user" or "publisher"
     * Once registered, a token will be sent along with a cookie (token = xxx)

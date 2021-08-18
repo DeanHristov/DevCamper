@@ -3,6 +3,8 @@ const path = require('path');
 const BootcampModule = require('../models/Bootcamps');
 const ErrorResponse = require('../utils/ErrorResponse');
 const asyncHandler = require('../utils/asyncHandler');
+const {isNotNull} = require("../utils/Utils");
+const { USER_ROLES, MIME_TYPES } = require('../commons/constants')
 
 // @desc:   Get all bootcamps
 // @route:  {GET} /api/v1/bootcamps
@@ -32,13 +34,19 @@ exports.getBootcampById = asyncHandler(async (req, res, next) => {
 // @route:  {POST} /api/v1/bootcamps/
 // @access: Private
 exports.creatBootCamp = asyncHandler(async (req, res, next) => {
+    req.body.user = req.user.id;
+
+    const publishedUser = await BootcampModule.findOne({ user: req.user.id });
+
+    // Limit the publisher to create only one bootcamp
+    if (isNotNull(publishedUser) && req.user.role !== USER_ROLES.ADMIN) {
+        return next(new ErrorResponse('Error! The publisher can upload only one bootcamp!', 400))
+    }
+
     const newBootcamp = await BootcampModule.create(req.body);
 
     res.status(201);
-    res.json({
-        success: true,
-        data: [newBootcamp]
-    });
+    res.json({ success: true, data: [newBootcamp] });
 })
 
 // @desc:   Removing existing bootcamp
@@ -50,6 +58,12 @@ exports.deleteBootCamp = asyncHandler(async (req, res, next) => {
     if (!bootcamp) {
         return next(new ErrorResponse(`Error! Bootcamp with id ${req.params.id} doesn't exists!`, 400));
     }
+
+    // Check if the user is owner of the bootcamp
+    if (bootcamp.user.toString() !== req.user.id && req.user.role !== USER_ROLES.ADMIN) {
+        return next(new ErrorResponse(`Error! This user is not authorize to modify this bootcamp`, 401));
+    }
+
     bootcamp.remove();
     res.status(200);
     return res.json({
@@ -63,25 +77,29 @@ exports.deleteBootCamp = asyncHandler(async (req, res, next) => {
 // @route:  {PUT} /api/v1/bootcamps/:id
 // @access: Private
 exports.updateBootCamp = asyncHandler(async (req, res, next) => {
-    res.status(200);
-    return res.json({
-        success: false,
-        data: [{msg: 'This method is not implement yet'}]
-    });
+    return next(new ErrorResponse('Error! Method is not allowed', 405))
 })
 
 // @desc:   Modify specific field from existing bootcamp
 // @route:  {PATCH} /api/v1/bootcamps/:id
 // @access: Private
 exports.modifyBootCamp = asyncHandler(async (req, res, next) => {
-    const bootcamp = await BootcampModule.findByIdAndUpdate(req.params['id'], req.body, {
+    const { id } = req.params;
+    let bootcamp = await BootcampModule.findById(id);
+
+    if (!bootcamp) {
+        return next(new ErrorResponse(`Error! Bootcamp with id ${id} doesn't exists!`, 400));
+    }
+
+    // Check if the user is owner of the bootcamp
+    if (bootcamp.user.toString() !== req.user.id && req.user.role !== USER_ROLES.ADMIN) {
+        return next(new ErrorResponse(`Error! This user is not authorize to modify this bootcamp`, 401));
+    }
+
+    bootcamp = await BootcampModule.findByIdAndUpdate(id, req.body, {
         new: true,
         runValidators: true,
     });
-
-    if (!bootcamp) {
-        return next(new ErrorResponse(`Error! Bootcamp with id ${req.params.id} doesn't exists!`, 400));
-    }
 
     res.status(200);
     return res.json({
@@ -106,10 +124,15 @@ exports.uploadBootcampPhoto = asyncHandler(async (req, res, next) => {
         return next(new ErrorResponse(`Error! Missing file!`, 400));
     }
 
-    const file = req.files['file\n'];
+    // Check if the user is owner of the bootcamp
+    if (bootcamp.user.toString() !== req.user.id && req.user.role !== USER_ROLES.ADMIN) {
+        return next(new ErrorResponse(`Error! This user is not authorize to modify this bootcamp`, 401));
+    }
+
+    const file = req.files['file'];
 
     //Validate the input file
-    if (!file.mimetype.startsWith('image/jpeg') || file.size > FILE_UPLOAD_MAX_LIMIT_SIZE) {
+    if (!file.mimetype.startsWith(MIME_TYPES.JPEG) || file.size > FILE_UPLOAD_MAX_LIMIT_SIZE) {
         // @see: https://stackoverflow.com/questions /30114881/how-does-this-equal-10mb
         const maxSize = FILE_UPLOAD_MAX_LIMIT_SIZE / 1024 / 1024;
         return next(new ErrorResponse(

@@ -37,7 +37,7 @@ app.use(fileUpload({
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Including middlewares in DEV mode
-if (NODE_ENV === 'dev elopment') {
+if (NODE_ENV === 'development') {
     app.use(morgan('dev'))
 }
 // Connect to the db
