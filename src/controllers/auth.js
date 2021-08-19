@@ -53,6 +53,38 @@ exports.getMyself = asyncHandler(async (req, res, next) => {
     res.status(200).json({ success: true, data: [currUser] })
 });
 
+// @desc:   Updated the user details (name and email)
+// @route:  {PUT} /api/v1/auth/update-users
+// @access: Private
+exports.modifyUser = asyncHandler(async (req, res, next) => {
+    const { name, email } = req.body
+    const { id } = req.user
+    const options = { new: true, runValidators: true }
+    const selectedUser = await UserModule.findByIdAndUpdate(id, { name, email }, options);
+
+    res.status(200)
+        .json({
+            success: true,
+            data: [selectedUser]
+        })
+});
+
+// @desc:   Modify the user password
+// @route:  {PUT} /api/v1/auth/change-password
+// @access: Private
+exports.updateUserPassword = asyncHandler(async (req, res, next) => {
+    const {currentPassword, newPassword} = req.body;
+    const user = await UserModule.findById(req.user.id).select('+password')
+
+    if (!(await user.isMatchedPasswords(currentPassword))) {
+        return next(new ErrorResponse('Error! The password doesn\'t match!', 401))
+    }
+
+    user.password = newPassword;
+    await user.save({ validateBeforeSave: false })
+
+    sendTokenToResponse(user, 200, res);
+});
 
 // @desc:   Forgot password
 // @route:  {POST} /api/v1/auth/forgot-password
