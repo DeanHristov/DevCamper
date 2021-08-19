@@ -8,7 +8,10 @@ const {
 const { protectRoute, grantAccessToRoles } = require('../middlewares/auth')
 const BootcampModel = require('../models/Bootcamps');
 const advanceFiltering = require('../middlewares/advanceFiltering');
+
 const courseRouter = require('./courses');
+const reviewRouter = require('./reviews');
+
 const { USER_ROLES } = require('../commons/constants')
 const populateParams = {
     path: 'courses',
@@ -16,6 +19,7 @@ const populateParams = {
 };
 
 router.use('/:bootcampId/courses', courseRouter)
+router.use('/:bootcampId/reviews', reviewRouter)
 
 router.route('/')
     .get(advanceFiltering(BootcampModel, populateParams), getAllBootCamps)
