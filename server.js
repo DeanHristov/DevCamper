@@ -47,12 +47,14 @@ const bootcampsRouter = require('./src/routes/bootcamps');
 const coursesRouter = require('./src/routes/courses');
 const authRouter = require('./src/routes/auth');
 const adminRouter = require('./src/routes/admin');
+const reviewsRouter = require('./src/routes/reviews');
 
 // Mount the routes
 app.use(`${API_VERSION}/bootcamps`, bootcampsRouter);
 app.use(`${API_VERSION}/courses`, coursesRouter);
 app.use(`${API_VERSION}/auth`, authRouter);
 app.use(`${API_VERSION}/auth/users`, adminRouter);
+app.use(`${API_VERSION}/auth/reviews`, reviewsRouter);
 
 app.use(errorHandler);
 
