@@ -46,11 +46,13 @@ if (NODE_ENV === 'development') {
 const bootcampsRouter = require('./src/routes/bootcamps');
 const coursesRouter = require('./src/routes/courses');
 const authRouter = require('./src/routes/auth');
+const adminRouter = require('./src/routes/admin');
 
 // Mount the routes
 app.use(`${API_VERSION}/bootcamps`, bootcampsRouter);
 app.use(`${API_VERSION}/courses`, coursesRouter);
 app.use(`${API_VERSION}/auth`, authRouter);
+app.use(`${API_VERSION}/auth/users`, adminRouter);
 
 app.use(errorHandler);
 
