@@ -1,12 +1,37 @@
 # DevCamper
+The main idea behind this repo is to show you my ability to work with this kind of technology and how I organize the project and code.
+
+DevCamper support basic functionality like GRUD operations, authentication (JWT/cookies),
+grouping users by rules, protecting the endpoints and others.
+
 ## Requirements
 * [Node](https://nodejs.org/en/) `^14.15.0`
 * [Yarn](https://yarnpkg.com/) `^1.22.4` or [NPM](https://www.npmjs.com/) `^6.14.5`
 
 ## Installation
-```$ npm install``` or ```$yarn install```
+After confirming that your environment meets the above [requirements](#requirements), it is time to clone the project locally by doing the following:
+
+```bash
+$ git clone https://github.com/DeanHristov/DevCamper.git <project-name>
+$ cd <project-name>
+```
+
+When you're done with the steps above, you need to install the project dependencies.
+
+```bash
+$ npm install #or using 'yarn install' 
+```
 
 ## Running the Project
+Importing **mock** data into DB
+```bash
+$ npm run importData
+```
+Removing the data from DB
+```bash
+$ npm run destroyData
+```
+
 Running the app in **development** mode
 ```bash
 $ npm run:dev  # Start the development server or `yarn run:dev`
@@ -73,7 +98,7 @@ $ npm run:prod  # Start the development server or `yarn run:prod`
 
 ### Users & Authentication
 - Authentication will be ton using JWT/cookies
-    * JWT and cookie should expire in 30 days
+    * JWT and cookie should expire in 1 hour
 - User registration
     * Register as a "user" or "publisher"
     * Once registered, a token will be sent along with a cookie (token = xxx)
@@ -137,10 +162,10 @@ All tasks automation are based on [NPM scripts](https://docs.npmjs.com/misc/scri
 
 Tasks              | Description
 ------------------ |---------------------------------------------------------------------------------------
-npm run:dev          | Run in **dev** mode
-npm run:prod         | Run in **prod** mode
-npm install:mockData | Import mock data
-npm run:destroy      | Destroy the all data
+npm run dev          | Run in **dev** mode
+npm run prod         | Run in **prod** mode
+npm run importData   | Import mock data
+npm run destroyData  | Destroy the all data
 
 ## Tools
 
@@ -154,21 +179,34 @@ npm run:destroy      | Destroy the all data
 
 ## NPM Packages
 
-- dotenv - https://github.com/motdotla/dotenv#readme
-- morgan - https://github.com/expressjs/morgan
-- colors - https://github.com/Marak/colors.js
-- slugify - https://github.com/simov/slugify
-- node-geocoder - https://github.com/nchaulet/node-geocoder
-- bcryptjs - https://github.com/dcodeIO/bcrypt.js#readme
-- jsonwebtoken - https://github.com/auth0/node-jsonwebtoken
-- nodemailer - https://nodemailer.com/about/
-- express-mongo-sanitize - https://github.com/fiznool/express-mongo-sanitize#readme
-- xss-clean - https://github.com/jsonmaur/xss-clean
-- helmet - https://github.com/helmetjs/helmet
-- hpp - https://github.com/analog-nico/hpp
-- express-rate-limit - https://github.com/nfriedly/express-rate-limit
-- cors - https://github.com/expressjs/cors
-- pm2 - https://github.com/Unitech/pm2
+- [dotenv](https://github.com/motdotla/dotenv#readme)
+- [morgan](https://github.com/expressjs/morgan)
+- [colors](https://github.com/Marak/colors.js)
+- [slugify](https://github.com/simov/slugify)
+- [node-geocoder](https://github.com/nchaulet/node-geocoder)
+- [bcryptjs](https://github.com/dcodeIO/bcrypt.js#readme)
+- [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
+- [nodemailer](https://nodemailer.com/about/)
+- [express-mongo-sanitize](https://github.com/fiznool/express-mongo-sanitize#readme)
+- [xss-clean](https://github.com/jsonmaur/xss-clean)
+- [helmet](https://helmetjs.github.io/)
+- [hpp](https://github.com/analog-nico/hpp)
+- [express-rate-limit](https://github.com/nfriedly/express-rate-limit)
+- [cors](https://github.com/expressjs/cors)
+- [pm2](https://github.com/Unitech/pm2)
+
+## Helpful resources
+
+- [ExpressJS](https://expressjs.com/)
+- [MongooseJS](https://mongoosejs.com/)
+- [HTTP Status Codes](https://httpstatuses.com/)
+- [HTTP methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
+- [Promises in JavaScript](https://zellwk.com/blog/js-promises/)
+- [JavaScript async and await](https://zellwk.com/blog/async-await/)
+- [Using Async/await in Express](https://zellwk.com/blog/async-await-express/)
+- [DRY in Express middlewares](https://www.acuriousanimal.com/blog/20180315/express-async-middleware)
+- [Best practices for REST API design](https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/)
+- [Hacking NodeJS and MongoDB](https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html)
 
 ## Made by 
-- Author: [D. Hristov](https://dhristov.eu/) | Version: [1.0.0]() | Documentation [here]() |  License: [MIT](https://opensource.org/licenses/MIT)
+- Author: [D. Hristov](https://dhristov.eu/) | Version: [1.0.0]() | Documentation [here](https://documenter.getpostman.com/view/14552290/TzzBrcAQ) |  License: [MIT](https://opensource.org/licenses/MIT)

@@ -1,0 +1,1119 @@
+{
+	"info": {
+		"_postman_id": "d1fd3fa8-d204-4541-a871-a2c546c6e4a5",
+		"name": "DevCamper API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Bootcampers",
+			"item": [
+				{
+					"name": "Get all bootcampers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/bootcamps",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bootcamps"
+							]
+						},
+						"description": "Fetch the all bootcamps from the DB. Including pagination and filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "Get bootcamps by query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/bootcamps?housing=false&selectBy=name,description&limit=2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bootcamps"
+							],
+							"query": [
+								{
+									"key": "housing",
+									"value": "false"
+								},
+								{
+									"key": "selectBy",
+									"value": "name,description"
+								},
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						},
+						"description": "Example, how we can fetch the bootcamps from the DB with custom URL"
+					},
+					"response": []
+				},
+				{
+					"name": "Get single bootcamper",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/bootcamps/6113dbb821d4c3cab375c1d8",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bootcamps",
+								"6113dbb821d4c3cab375c1d8"
+							]
+						},
+						"description": "Fetch a single bootcamp from the DB. This method is public"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete specific bootcamper",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/bootcamps/132",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bootcamps",
+								"132"
+							]
+						},
+						"description": "Removing a single bootcamp from the DB. Only the the authorized users (owner/admin) can do this."
+					},
+					"response": []
+				},
+				{
+					"name": "Upload bootcamp photo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"type": "file",
+									"src": "/Users/deanhristov/Downloads/unnamed.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/bootcamps/5d713995b721c3bb38c1f5d0/photo",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bootcamps",
+								"5d713995b721c3bb38c1f5d0",
+								"photo"
+							]
+						},
+						"description": "Uploading an image to particular bootcamp. \nOnly the the authorized (owner and admin) users can do this."
+					},
+					"response": []
+				},
+				{
+					"name": "Updating existing bootcamper",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"housing\": true,\n    \"jobAssistance\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/bootcamps/5d713995b721c3bb38c1f5d0",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bootcamps",
+								"5d713995b721c3bb38c1f5d0"
+							]
+						},
+						"description": "Modify/update existing bootcamp and save it in DB. Only the the authorized users (owner/admin) can do this."
+					},
+					"response": []
+				},
+				{
+					"name": "Updating particular fields",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/bootcamps/132",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bootcamps",
+								"132"
+							]
+						},
+						"description": "Not supported in this version"
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new single bootcamper",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"location\": {\n    \"coordinates\": []\n  },\n  \"careers\": [\n    \"Web Development\",\n    \"UI/UX\",\n    \"Mobile Development\"\n  ],\n  \"photo\": \"no-photo.png\",\n  \"housing\": false,\n  \"jobAssistance\": true,\n  \"jobGuarantee\": false,\n  \"acceptGi\": true,\n  \"name\": \"Test bootcamp 1\",\n  \"description\": \"ModernTech has one goal, and that is to make you a rockstar developer and/or designer with a six figure salary. We teach both development and UI/UX\",\n  \"website\": \"https://moderntech.com\",\n  \"phone\": \"(111) 111-111\",\n  \"address\": \"220 Pawtucket St, Lowell, MA 01854\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/bootcamps/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bootcamps",
+								""
+							]
+						},
+						"description": "Creating a new bootcamp and store it in DB. This request has additional roles (Only publisher/admin can use this action). The publisher can create only one bootcamp, but the admin can create many. This action is private and need to be set Bearer token"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "Fetch all courses",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/courses",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"courses"
+							]
+						},
+						"description": "Fetch the all courses from DB. Including custom pagination and filtering."
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch all courses by bootcamp",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/bootcamps/5d713a66ec8f2b88b8f830b8/courses",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bootcamps",
+								"5d713a66ec8f2b88b8f830b8",
+								"courses"
+							]
+						},
+						"description": "Custom request, that will select the all courses by bootcamp."
+					},
+					"response": []
+				},
+				{
+					"name": "Get single course by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/courses/5d725cb9c4ded7bcb480eaa1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"courses",
+								"5d725cb9c4ded7bcb480eaa1"
+							]
+						},
+						"description": "Select a single course from DB."
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"scholarshipAvailable\": false,\n    \"title\": \"Dummy course\",\n    \"description\": \"In this course you will learn all about the front end with HTML, CSS and JavaScript. You will master tools like Git and Webpack and also learn C# and ASP.NET with Postgres\",\n    \"weeks\": \"1\",\n    \"tuition\": 12000,\n    \"minimumSkill\": \"intermediate\",\n    \"bootcamp\": \"5d713a66ec8f2b88b8f830b8\",\n    \"user\": \"5d7a514b5d2c12c7449be046\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/bootcamps/5d713a66ec8f2b88b8f830b8/courses",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bootcamps",
+								"5d713a66ec8f2b88b8f830b8",
+								"courses"
+							]
+						},
+						"description": "Create a new course and attach it to particular bootcamp. Only the the authorized users (\"publishers\" and \"admin\") can do this."
+					},
+					"response": []
+				},
+				{
+					"name": "Removing single course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/courses/5d725cb9c4ded7bcb480eaa1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"courses",
+								"5d725cb9c4ded7bcb480eaa1"
+							]
+						},
+						"description": "Remove a course from DB. Only the the authorized, owner and admin users can do this."
+					},
+					"response": []
+				},
+				{
+					"name": "Updating single course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Full Stack Web Dev - Updated\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/courses/5d725cb9c4ded7bcb480eaa1",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"courses",
+								"5d725cb9c4ded7bcb480eaa1"
+							]
+						},
+						"description": "Modify/update a particular course from DB. Only the the authorized (owner/admin) users, owner and admin can do this."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Create a new user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"TOKEN\", pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"User\",\n    \"password\": \"dummy password\",\n    \"email\": \"user@my-site.com\",\n    \"role\": \"publisher\"\n}\n"
+						},
+						"url": {
+							"raw": "{{URL}}/auth/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Creating a new user and save it in DB. Only the admin can do this. This request is private and need to be set Bearer token."
+					},
+					"response": []
+				},
+				{
+					"name": "Get logged user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/auth/me",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						},
+						"description": "Getting info about logged user."
+					},
+					"response": []
+				},
+				{
+					"name": "Sign in with email/password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"TOKEN\", pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"publisher@my-site.com\",\n    \"password\": \"123456\"\n} ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/signIn",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"signIn"
+							]
+						},
+						"description": "Added ability to log in"
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user55@my-site.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/forgot-password",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"forgot-password"
+							]
+						},
+						"description": "Creating a new temporary URL link, that it will expire 10mn later and send it to the user's email.Only the the authorized users can do this."
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"newPassword\" : \"1234569\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/reset-password/c56b8e32e04bc51e35c3c29cf1857e3eb1b9244c",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"reset-password",
+								"c56b8e32e04bc51e35c3c29cf1857e3eb1b9244c"
+							]
+						},
+						"description": "Setting the new password. this URL is auto-generated and it has live 10minutes."
+					},
+					"response": []
+				},
+				{
+					"name": "Modify logged user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Publisher Account 1\",\n    \"email\": \"publisher1@my-site.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/update-users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"update-users"
+							]
+						},
+						"description": "Modify user data and save it in DB. Only the the authorized (logged user and admin) users can do this."
+					},
+					"response": []
+				},
+				{
+					"name": "Update user password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"TOKEN\", pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currentPassword\" : \"123456\",\n    \"newPassword\": \"123456a\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/auth/change-password",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"change-password"
+							]
+						},
+						"description": "Change the current user's password and store it in DB as a hash (not in pure format). Only the the authorized (logged user and admin) users can do this."
+					},
+					"response": []
+				},
+				{
+					"name": "Sign out the user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/signOut",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"signOut"
+							]
+						},
+						"description": "Log out ability"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Fetch all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"users"
+							]
+						},
+						"description": "Fetch the all users from DB. Only an user with role \"admin\" can do this."
+					},
+					"response": []
+				},
+				{
+					"name": "Get single user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/users/5d7a514b5d2c12c7449be001",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"users",
+								"5d7a514b5d2c12c7449be001"
+							]
+						},
+						"description": "Select a single user from DB. Only the admin have access to this route."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete existing user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/users/:userId",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": null
+								}
+							]
+						},
+						"description": "Removing existing user from DB. Only the admin have access to this route."
+					},
+					"response": []
+				},
+				{
+					"name": "Create a new user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"role\": \"publisher\",\n    \"name\": \"Publisher Account 2\",\n    \"email\": \"publisher2@my-site.com\",\n    \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/auth/users/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"users",
+								""
+							]
+						},
+						"description": "Creating a new user and store it in DB. Only the admin have access to this route."
+					},
+					"response": []
+				},
+				{
+					"name": "Modify existing user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"name\": \"Publisher Account 22\",\n    \"email\": \"publisher22@my-site.com\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/auth/users/:userId",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"users",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": null
+								}
+							]
+						},
+						"description": "Modify/update existing user. Only the admin have access to this route."
+					},
+					"response": []
+				}
+			],
+			"description": "Store the all actions, that only the Admin user has access to them are here."
+		},
+		{
+			"name": "Bootcamp Reviews & Ratings",
+			"item": [
+				{
+					"name": "Fetch all reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/reviews",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"reviews"
+							]
+						},
+						"description": "Fetch the all review from DB. Included pagination and custom filtering"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all bootcamp's reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/bootcamps/5d713a66ec8f2b88b8f830b8/reviews",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bootcamps",
+								"5d713a66ec8f2b88b8f830b8",
+								"reviews"
+							]
+						},
+						"description": "Getting a single bootcamp's review from DB."
+					},
+					"response": []
+				},
+				{
+					"name": "Get single review",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/reviews/5d7a514b5d2c12c7449be023",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"reviews",
+								"5d7a514b5d2c12c7449be023"
+							]
+						},
+						"description": "Getting a single review by reviewId from DB."
+					},
+					"response": []
+				},
+				{
+					"name": "Modify existing review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"test modify review 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/auth/reviews/611e453a501e8c19746db2f6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"reviews",
+								"611e453a501e8c19746db2f6"
+							]
+						},
+						"description": "Update/modify existing review from the DB. Only the admin and particular user can do this.\n\nExample: The owner cannot change the rating of  his own review."
+					},
+					"response": []
+				},
+				{
+					"name": "Remove existing review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/auth/reviews/611e453a501e8c19746db2f6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"auth",
+								"reviews",
+								"611e453a501e8c19746db2f6"
+							]
+						},
+						"description": "Removing existing review from the DB. Only the admin and the owner can do this."
+					},
+					"response": []
+				},
+				{
+					"name": "Create a review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Not that great 1\",\n     \"rating\" : 1,\n    \"text\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra feugiat mauris id viverra. Duis luctus ex sed facilisis ultrices. Curabitur scelerisque bibendum ligula, quis condimentum libero fermentum in. Aenean erat erat, aliquam in purus a, rhoncus hendrerit tellus. Donec accumsan justo in felis consequat sollicitudin. Fusce luctus mattis nunc vitae maximus. Curabitur semper felis eu magna laoreet scelerisque\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/bootcamps/5d713995b721c3bb38c1f5d0/reviews",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"bootcamps",
+								"5d713995b721c3bb38c1f5d0",
+								"reviews"
+							]
+						},
+						"description": "Creating a new review. Authenticated users only can access to this route. The user must have role: \"user\" or \"admin\"."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
