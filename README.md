@@ -206,5 +206,7 @@ npm run destroyData  | Destroy the all data
 - [Using Async/await in Express](https://zellwk.com/blog/async-await-express/)
 - [DRY in Express middlewares](https://www.acuriousanimal.com/blog/20180315/express-async-middleware)
 - [Best practices for REST API design](https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/)
+- [Hacking NodeJS and MongoDB](https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html)
+- 
 ## Made by 
 - Author: [D. Hristov](https://dhristov.eu/) | Version: [1.0.0]() | Documentation [here]() |  License: [MIT](https://opensource.org/licenses/MIT)

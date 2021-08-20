@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const colors = require('colors');
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser')
+const mongoSanitize = require('express-mongo-sanitize');
 
 const connectDB = require('./src/core/connectDB');
 const errorHandler = require('./src/middlewares/errorHandler');
@@ -27,6 +28,10 @@ const PORT = NODE_PORT || 3000
 // Added third-party middlewares
 app.use(express.json());
 app.use(cookieParser());
+// To remove data, use:
+app.use(mongoSanitize({
+    replaceWith: '_',
+}));
 
 // Uploading file
 app.use(fileUpload({

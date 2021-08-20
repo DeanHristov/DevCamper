@@ -6,7 +6,7 @@ module.exports = (err, req, res, next) => {
 
     switch (err.name) {
         case 'CastError':
-            message = `Error! Resources not found with id of "${error.value}"!`;
+            message = `Error! Resources not found!`;
 
             error = new ErrorResponse(message, 404)
             break;
