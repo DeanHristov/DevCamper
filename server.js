@@ -7,6 +7,8 @@ const colors = require('colors');
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser')
 const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+const xssClean = require('xss-clean')
 
 const connectDB = require('./src/core/connectDB');
 const errorHandler = require('./src/middlewares/errorHandler');
@@ -28,7 +30,14 @@ const PORT = NODE_PORT || 3000
 // Added third-party middlewares
 app.use(express.json());
 app.use(cookieParser());
-// To remove data, use:
+
+// Prevent XSS attacks
+app.use(xssClean());
+
+// Set security headers
+app.use(helmet());
+
+// To remove data
 app.use(mongoSanitize({
     replaceWith: '_',
 }));
