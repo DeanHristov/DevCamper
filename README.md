@@ -179,21 +179,21 @@ npm run destroyData  | Destroy the all data
 
 ## NPM Packages
 
-- dotenv - https://github.com/motdotla/dotenv#readme
-- morgan - https://github.com/expressjs/morgan
-- colors - https://github.com/Marak/colors.js
-- slugify - https://github.com/simov/slugify
-- node-geocoder - https://github.com/nchaulet/node-geocoder
-- bcryptjs - https://github.com/dcodeIO/bcrypt.js#readme
-- jsonwebtoken - https://github.com/auth0/node-jsonwebtoken
-- nodemailer - https://nodemailer.com/about/
-- express-mongo-sanitize - https://github.com/fiznool/express-mongo-sanitize#readme
-- xss-clean - https://github.com/jsonmaur/xss-clean
-- helmet - https://github.com/helmetjs/helmet
-- hpp - https://github.com/analog-nico/hpp
-- express-rate-limit - https://github.com/nfriedly/express-rate-limit
-- cors - https://github.com/expressjs/cors
-- pm2 - https://github.com/Unitech/pm2
+- [dotenv](https://github.com/motdotla/dotenv#readme)
+- [morgan](https://github.com/expressjs/morgan)
+- [colors](https://github.com/Marak/colors.js)
+- [slugify](https://github.com/simov/slugify)
+- [node-geocoder](https://github.com/nchaulet/node-geocoder)
+- [bcryptjs](https://github.com/dcodeIO/bcrypt.js#readme)
+- [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
+- [nodemailer](https://nodemailer.com/about/)
+- [express-mongo-sanitize](https://github.com/fiznool/express-mongo-sanitize#readme)
+- [xss-clean](https://github.com/jsonmaur/xss-clean)
+- [helmet](https://helmetjs.github.io/)
+- [hpp](https://github.com/analog-nico/hpp)
+- [express-rate-limit](https://github.com/nfriedly/express-rate-limit)
+- [cors](https://github.com/expressjs/cors)
+- [pm2](https://github.com/Unitech/pm2)
 
 ## Helpful resources
 
@@ -206,5 +206,7 @@ npm run destroyData  | Destroy the all data
 - [Using Async/await in Express](https://zellwk.com/blog/async-await-express/)
 - [DRY in Express middlewares](https://www.acuriousanimal.com/blog/20180315/express-async-middleware)
 - [Best practices for REST API design](https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/)
+- [Hacking NodeJS and MongoDB](https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html)
+
 ## Made by 
 - Author: [D. Hristov](https://dhristov.eu/) | Version: [1.0.0]() | Documentation [here]() |  License: [MIT](https://opensource.org/licenses/MIT)

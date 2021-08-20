@@ -6,6 +6,12 @@ const morgan = require('morgan');
 const colors = require('colors');
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser')
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+const xssClean = require('xss-clean');
+const rateLimit = require("express-rate-limit");
+const hpp = require("hpp");
+const cors = require("cors");
 
 const connectDB = require('./src/core/connectDB');
 const errorHandler = require('./src/middlewares/errorHandler');
@@ -27,6 +33,26 @@ const PORT = NODE_PORT || 3000
 // Added third-party middlewares
 app.use(express.json());
 app.use(cookieParser());
+app.use(hpp())
+
+// Enable CORS
+app.use(cors());
+// Prevent multiple request from one client per time
+app.use(rateLimit({
+    windowMs: 10 * 60 * 1000, // 10 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
+}));
+
+// Prevent XSS attacks
+app.use(xssClean());
+
+// Set security headers
+app.use(helmet());
+
+// To remove data
+app.use(mongoSanitize({
+    replaceWith: '_',
+}));
 
 // Uploading file
 app.use(fileUpload({
