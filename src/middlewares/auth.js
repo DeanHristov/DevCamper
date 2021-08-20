@@ -8,9 +8,11 @@ const { isNull } = require('../utils/Utils');
 const { JWT_SECRET } = process.env;
 
 exports.protectRoute = asyncHandler(async (req, res, next) => {
-    let token = null // req.cookies.token ? req.cookies.token : null;
+    // Set the token from cookie
+    let token = req.cookies.token ? req.cookies.token : null;
     const { authorization } = req.headers;
 
+    // Set the token from header
     if (authorization && authorization.startsWith('Bearer')) {
         token = authorization.split(' ')[1];
     }
